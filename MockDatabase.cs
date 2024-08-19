@@ -2,8 +2,12 @@
 
 internal static class MockDatabase
 {
-    internal static List<string> Books = new()
-    {
-    "The Great Gatsby", "To Kill a Mockingbird", "1984", "Pride and Prejudice", "The Catcher in the Rye", "The Hobbit", "Moby-Dick", "War and Peace", "The Odyssey", "The Lord of the Rings", "Jane Eyre", "Animal Farm", "Brave New World", "The Chronicles of Narnia", "The Diary of a Young Girl", "The Alchemist", "Wuthering Heights", "Fahrenheit 451", "Catch-22", "The Hitchhiker's Guide to the Galaxy"
+    internal static List<Book> Books = new()
+     {
+        new Book(1, "The Great Gatsby", "F. Scott Fitzgerald", "Fiction", "A1", 218),
+        new Book(2, "To Kill a Mockingbird", "Harper Lee", "Fiction", "A2", 324),
+        new Book(3, "1984", "George Orwell", "Dystopian", "A3", 328),
+        new Book(4, "Pride and Prejudice", "Jane Austen", "Romance", "A4", 279),
+        new Book(5, "The Catcher in the Rye", "J.D. Salinger", "Fiction", "A5", 214)
     };
 }

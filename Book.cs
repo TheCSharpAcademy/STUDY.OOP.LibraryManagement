@@ -2,25 +2,20 @@
 
 internal class Book
 {
-    string Name;
-    string Location;
+    public int Id { get; set; } 
+    public string Name { get; set; }
+    public string Location { get; set; }
+    public string Author { get; set; }
+    public string Category { get; set; }
+    public int Pages { get; set; }
 
-    internal Book()
+    internal Book(int id, string name, string author, string category, string location, int pages)
     {
-        Console.WriteLine($"Book name and location are unknown");
-    }
-
-    internal Book(string name)
-    {
-        Name = name;
-        Console.WriteLine($"Book name = {name} and location is unknown");
-    }
-
-    internal Book(string name, string location)
-    {
-        Name = name;
+        Id = id;
+        Name = name;  
+        Author = author;
+        Category = category;
         Location = location;
-
-        Console.WriteLine($"Book name = {name} and location is {location}");
+        Pages = pages;
     }
 }
