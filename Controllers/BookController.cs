@@ -3,7 +3,7 @@ using STUDY.OOP.LibraryManagement.Models;
 
 namespace STUDY.OOP.LibraryManagement.Controllers;
 
-internal class BookController : IBaseController
+internal class BookController : BaseController, IBaseController
 {
     public void AddItem()
     {
@@ -15,16 +15,16 @@ internal class BookController : IBaseController
 
         if (MockDatabase.LibraryItems.OfType<Book>().Any(b => b.Name.Equals(title, StringComparison.OrdinalIgnoreCase)))
         {
-            AnsiConsole.MarkupLine("[red]This book already exists.[/]");
+            DisplayMessage("Book added successfully!", "green");
         }
         else
         {
             var newBook = new Book(MockDatabase.LibraryItems.Count + 1, title, author, category, location, pages);
             MockDatabase.LibraryItems.Add(newBook);
-            AnsiConsole.MarkupLine("[green]Book added successfully![/]");
+            DisplayMessage("Book added successfully!", "green");
         }
 
-        AnsiConsole.MarkupLine("Press Any Key to Continue.");
+        DisplayMessage("Press Any Key to Continue.");
         Console.ReadKey();
     }
 
@@ -45,16 +45,22 @@ internal class BookController : IBaseController
                 .UseConverter(b => $"{b.Name} by {b.Author}")
                 .AddChoices(books));
 
-        if (MockDatabase.LibraryItems.Remove(bookToDelete))
+        if (ConfirmDeletion(bookToDelete.Name))
         {
-            AnsiConsole.MarkupLine("[red]Book deleted successfully![/]");
-        }
-        else
+            if (MockDatabase.LibraryItems.Remove(bookToDelete))
+            {
+                DisplayMessage("Book deleted successfully!", "red");
+            }
+            else
+            {
+                DisplayMessage("Book not found.", "red");
+            }
+        } else
         {
-            AnsiConsole.MarkupLine("[red]Book not found.[/]");
+            DisplayMessage("Deletion canceled.", "yellow");
         }
 
-        AnsiConsole.MarkupLine("Press Any Key to Continue.");
+        DisplayMessage("Press Any Key to Continue.", "green");
         Console.ReadKey();
     }
 
